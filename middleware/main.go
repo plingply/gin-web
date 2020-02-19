@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/sirupsen/logrus"
 )
 
@@ -39,6 +40,8 @@ func LoggerToFile() gin.HandlerFunc {
 	//日志文件
 	fileName := path.Join(logFilePath, logFileName)
 
+	fmt.Println("log=>", fileName)
+
 	//写入文件
 	src, err := os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY, os.ModeAppend)
 	if err != nil {
@@ -63,8 +66,12 @@ func LoggerToFile() gin.HandlerFunc {
 		// 开始时间
 		startTime := time.Now()
 
+		fmt.Println("requres start")
+
 		// 处理请求
 		c.Next()
+
+		fmt.Println("requres end")
 
 		// 结束时间
 		endTime := time.Now()
