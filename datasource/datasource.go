@@ -2,11 +2,12 @@ package datasource
 
 import (
 	"fmt"
-	"gin-web/configs"
+	"os"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 var db *gorm.DB
@@ -19,15 +20,15 @@ func init() {
 
 	var err error
 	var urlStr string
-	database := configs.Get("database")
-	databasetype := database.Key("TYPE").MustString("mysql")
-	user := database.Key("USER").String()
-	password := database.Key("PASSWORD").String()
-	host := database.Key("HOST").String()
-	port := database.Key("PORT").String()
-	tablename := database.Key("TABLENAME").String()
+	databasetype := os.Getenv("DATABASETYPE")
+	user := os.Getenv("DATABASEUSER")
+	password := os.Getenv("DATABASEPASSWORD")
+	host := os.Getenv("DATABASEHOST")
+	port := os.Getenv("DATABASEPORT")
+	tablename := os.Getenv("DATABASETABLENAME")
 	urlStr = user + ":" + password + "@tcp(" + host + ":" + port + ")/" + tablename + "?charset=utf8&parseTime=True&loc=Local"
 
+	fmt.Println("mysqp=>", databasetype, "----", urlStr)
 	db, err = gorm.Open(databasetype, urlStr)
 
 	if err != nil {

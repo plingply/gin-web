@@ -1,15 +1,16 @@
 package main
 
 import (
-	"gin-web/configs"
 	"gin-web/middleware"
 	router "gin-web/router"
+	"os"
 
 	"github.com/gin-gonic/gin"
+
+	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
-
 	server := gin.Default()
 	// 全局中间件
 	// Logger 中间件将写日志到 gin.DefaultWriter ,即使你设置 GIN_MODE=release 。
@@ -26,7 +27,7 @@ func main() {
 
 	router.InitRouter(server)
 
-	port := configs.Get("server").Key("PORT").String()
+	port := os.Getenv("PORT")
 
 	server.Run(":" + port)
 

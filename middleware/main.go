@@ -3,7 +3,6 @@ package middleware
 import (
 	"errors"
 	"fmt"
-	"gin-web/configs"
 	"os"
 	"path"
 	"time"
@@ -34,8 +33,8 @@ func DummyMiddleware(c *gin.Context) {
 // 日志记录到文件
 func LoggerToFile() gin.HandlerFunc {
 
-	logFilePath := configs.Get("log").Key("Log_FILE_PATH").String()
-	logFileName := configs.Get("log").Key("Log_FILE_NAME").String()
+	logFilePath := os.Getenv("Log_FILE_PATH")
+	logFileName := os.Getenv("Log_FILE_NAME")
 
 	//日志文件
 	fileName := path.Join(logFilePath, logFileName)

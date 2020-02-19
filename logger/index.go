@@ -2,12 +2,12 @@ package logger
 
 import (
 	"fmt"
-	"gin-web/configs"
 	"os"
 	"path"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/sirupsen/logrus"
 )
 
@@ -16,8 +16,8 @@ var logger = logrus.New()
 
 func log(c *gin.Context) map[string]interface{} {
 
-	logFilePath := configs.Get("log").Key("Log_FILE_PATH").String()
-	logFileName := configs.Get("log").Key("Log_FILE_NAME").String()
+	logFilePath := os.Getenv("Log_FILE_PATH")
+	logFileName := os.Getenv("Log_FILE_NAME")
 
 	//日志文件
 	fileName := path.Join(logFilePath, logFileName)
