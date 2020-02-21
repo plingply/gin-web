@@ -10,6 +10,12 @@ import (
 
 // InitRouter 初始化路由
 func InitRouter(router *gin.Engine) {
+
+	router.LoadHTMLGlob("static/*.html")
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(200, "index.html", nil)
+	})
+
 	api := router.Group("/api")
 	api.POST("/login", user_controller.Login)
 	api.POST("/refresh/token", base_controller.RefreshToken)
