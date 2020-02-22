@@ -48,7 +48,7 @@ func InitRouter(router *gin.Engine) {
 	// 文件上传
 	file := api.Group("/file")
 	{
-		file.Use(jwt.JWTAuth())
+		// file.Use(jwt.JWTAuth())
 		file.POST("/upload", file_controller.UpLoad)
 		file.POST("/oss/upload", file_controller.OSSUpLoad)
 	}
