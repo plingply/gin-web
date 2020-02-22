@@ -1,6 +1,7 @@
 package file_controller
 
 import (
+	"fmt"
 	"gin-web/models"
 	"gin-web/utils/response"
 	"io"
@@ -8,12 +9,15 @@ import (
 	"os"
 	"strings"
 
+	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
 	"github.com/spf13/cast"
 )
 
 func UpLoad(c *gin.Context) {
+
+	fmt.Println("OSS Go SDK Version: ", oss.Version)
 
 	var result models.Result
 	file, err := c.FormFile("file")
