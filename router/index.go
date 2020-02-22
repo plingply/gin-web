@@ -1,6 +1,7 @@
 package router
 
 import (
+	"gin-web/controllers/act_controller"
 	"gin-web/controllers/base_controller"
 	"gin-web/controllers/user_controller"
 	"gin-web/middleware/jwt"
@@ -12,9 +13,14 @@ import (
 func InitRouter(router *gin.Engine) {
 
 	router.LoadHTMLGlob("static/*.html")
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index.html", nil)
-	})
+
+	// 模板
+	view := router.Group("/")
+	{
+		view.GET("/", func(c *gin.Context) {
+			c.HTML(200, "index.html", nil)
+		})
+	}
 
 	api := router.Group("/api")
 	api.POST("/login", user_controller.Login)
@@ -28,4 +34,9 @@ func InitRouter(router *gin.Engine) {
 		user.GET("/info/:username", user_controller.Info)
 	}
 
+	// 文章
+	act := api.Group("/article")
+	{
+		act.GET("/list", act_controller.List)
+	}
 }

@@ -7,5 +7,6 @@ func Createtable() {
 	GetDB().AutoMigrate(
 		&models.User{},
 		&models.Type{},
+		&models.Article{},
 	)
 }
