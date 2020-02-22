@@ -3,6 +3,7 @@ package router
 import (
 	"gin-web/controllers/act_controller"
 	"gin-web/controllers/base_controller"
+	"gin-web/controllers/file_controller"
 	"gin-web/controllers/user_controller"
 	"gin-web/middleware/jwt"
 
@@ -19,6 +20,10 @@ func InitRouter(router *gin.Engine) {
 	{
 		view.GET("/", func(c *gin.Context) {
 			c.HTML(200, "index.html", nil)
+		})
+
+		view.GET("/upload", func(c *gin.Context) {
+			c.HTML(200, "upload.html", nil)
 		})
 	}
 
@@ -38,5 +43,11 @@ func InitRouter(router *gin.Engine) {
 	act := api.Group("/article")
 	{
 		act.GET("/list", act_controller.List)
+	}
+
+	// 文件上传
+	file := api.Group("/file")
+	{
+		file.POST("/upload", file_controller.UpLoad)
 	}
 }

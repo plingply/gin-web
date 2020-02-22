@@ -1,7 +1,6 @@
 package repo
 
 import (
-	"fmt"
 	"gin-web/datasource"
 	"gin-web/models"
 )

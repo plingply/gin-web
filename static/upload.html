@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件上传</title>
+
+    <style>
+        .upload {
+            padding-top: 50px;
+            width: 100%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="upload">
+        <form action="/api/file/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <div>
+                <button type="submit">上传</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
