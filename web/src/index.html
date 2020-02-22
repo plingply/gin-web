@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>鑫鑫书屋</title>
     <link rel="stylesheet" href="css/index.css">
     <script src="lib/drawbackground.min.js"></script>
@@ -30,14 +30,16 @@
             <p>new webpack.NamedChunksPlugin(),</p>
             <p>new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("development") })</p>
             <p>生成环境会执行一些混淆压缩代码</p>
-            <p><a href="https://www.cnblogs.com/cherryvenus/p/9808320.html">https://www.cnblogs.com/cherryvenus/p/9808320.html</a>
+            <p><a
+                    href="https://www.cnblogs.com/cherryvenus/p/9808320.html">https://www.cnblogs.com/cherryvenus/p/9808320.html</a>
             </p>
             <p>2 stats 设置控制台的显示，关闭模块信息，child信息，报错等等。详见文档。</p>
             <p>3 在vue配置中 HappyPack 会造成提取css没有作用域，造成图片无法显示等问题。</p>
             <p>4 new webpack.ProvidePlugin({</p>
             <p>$config: [resolve(`src/config/config.${process.env.NODE_ENV}.js`), 'default']</p>
             <p>}) 设置一个配置文件，名称可以根据环境设置，全局用$config 访问，神器。</p>
-            <p>5 webpack生成的hash值有三种，hash没打包一次都会变，chunkhash，根据chunk改变才会重新生成，contenthash：内容变化才会重新生成，在做持久化缓存的时候，往往需要稳住hash值，只有文件改变，打包的时候才会重新生成。要做到这点，需要做一些工作，一篇博客，<a href="https://imweb.io/topic/5b6f224a3cb5a02f33c013ba">https://imweb.io/topic/5b6f224a3cb5a02f33c013ba</a>
+            <p>5 webpack生成的hash值有三种，hash没打包一次都会变，chunkhash，根据chunk改变才会重新生成，contenthash：内容变化才会重新生成，在做持久化缓存的时候，往往需要稳住hash值，只有文件改变，打包的时候才会重新生成。要做到这点，需要做一些工作，一篇博客，<a
+                    href="https://imweb.io/topic/5b6f224a3cb5a02f33c013ba">https://imweb.io/topic/5b6f224a3cb5a02f33c013ba</a>
             </p>
         </div>
     </div>
