@@ -18,13 +18,13 @@
             <div class="title">鑫鑫小木屋</div>
             <p class="tishi">有你，每一天都是幸福的。</p>
             <div class="taglist">
-                <span class="active">JS</span>
-                <span>NODE</span>
+                <span @click="tabClick('')" :class="{ active: tabIndex == '' }">全部</span>
+                <span :class="{ active: tabIndex == item.code }" v-for="(item,index) in type" :key="index" @click="tabClick(item.code)">{{ item.name }}</span>
             </div>
         </header>
         <div class="left_menu">
-            <div v-for="(item,index) in list" :key="index">
-                <h1>{{ item.title }}</h1>
+            <div class="menu-row" v-for="(item, index) in list" :key="index">
+                <h1 class="textline">{{ item.title }}</h1>
                 <p>{{ item.remark }}</p>
             </div>
         </div>

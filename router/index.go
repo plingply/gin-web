@@ -13,7 +13,7 @@ import (
 // InitRouter 初始化路由
 func InitRouter(router *gin.Engine) {
 
-	router.LoadHTMLGlob("static/*.html")
+	// router.LoadHTMLGlob("static/*.html")
 
 	// // 模板
 	// view := router.Group("/")
@@ -43,6 +43,7 @@ func InitRouter(router *gin.Engine) {
 	act := api.Group("/article")
 	{
 		act.GET("/list", act_controller.List)
+		act.GET("/type", act_controller.TypeList)
 		act.GET("/info/:id", act_controller.Info)
 
 		act.Use(jwt.JWTAuth())

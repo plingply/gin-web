@@ -8,30 +8,44 @@ drawbackground({
 })
 
 Vue.prototype.http = Axios
+
 var app = new Vue({
     el: "#app",
+
     data: {
+
+        tabIndex: "",
+
         page: 1,
         limit: 10,
         count: 0,
-        list: []
+        list: [],
+        type: []
     },
 
     created() {
+        this.getTypeList()
         this.getList()
     },
 
     mounted() {
+        
     },
 
     methods: {
 
+        tabClick(code){
+            this.tabIndex = code 
+            this.getList()
+        },
+
         getList() {
             this.http.Get('/api/article/list', {
                 page: this.page,
-                    limit: this.limit
+                limit: this.limit,
+                type: this.tabIndex
             })
-                .then(function (res) {
+                .then( (res)=> {
                     if (res.code == 200) {
                         this.list = res.data.item
                         this.count = res.data.count
@@ -42,6 +56,18 @@ var app = new Vue({
                 });
 
 
-        }
-    },
+        },
+
+        getTypeList(){
+            this.http.Get("/api/article/type")
+            .then( (res)=> {
+                if (res.code == 200) {
+                    this.type = res.data
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+    }
 })

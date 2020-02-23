@@ -8,9 +8,10 @@ import (
 )
 
 type ActRepository interface {
-	GetList(page int, limit int) map[string]interface{}
+	GetList(page int, limit int, codes string) map[string]interface{}
 	Save(act models.Article) (int, models.Article)
 	GetActicleInfo(id uint) models.Params
+	GetTypeList() []models.Params
 	Deletes(id uint) models.Article
 }
 
@@ -21,12 +22,20 @@ func NewActRepository() ActRepository {
 }
 
 //获取列表
-func (n actRepositorys) GetList(page int, limit int) (params map[string]interface{}) {
+func (n actRepositorys) GetList(page int, limit int, codes string) (params map[string]interface{}) {
 
 	var count int = 0
 	db := datasource.GetDB()
 
-	rows, err := db.Table("article").Offset(page*limit - limit).Select("article.*, type.name as type_name").Joins("left join type on type.code = article.type").Limit(limit).Count(&count).Rows()
+	sql := db.Table("article").Offset(page*limit - limit).Select("article.*, type.name as type_name").Joins("left join type on type.code = article.type")
+
+	if codes != "" {
+		sql = sql.Where("article.type = ?", codes)
+	}
+
+	sql = sql.Limit(limit).Count(&count)
+
+	rows, err := sql.Rows()
 
 	if err != nil {
 		return nil
@@ -82,6 +91,23 @@ func (n actRepositorys) GetActicleInfo(id uint) (param models.Params) {
 	}
 
 	param = params[0]
+
+	return
+}
+
+func (n actRepositorys) GetTypeList() (param []models.Params) {
+	db := datasource.GetDB()
+	rows, err := db.Table("type").Select("*").Rows()
+
+	if err != nil {
+		return nil
+	}
+
+	param, errs := models.FormatResult(rows)
+
+	if errs != nil {
+		return nil
+	}
 
 	return
 }

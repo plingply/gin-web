@@ -15,7 +15,7 @@ func NewActServices() *actServices {
 var actRepo = repo.NewActRepository()
 
 // List 列表
-func (u actServices) List(page int, limit int) (result models.Result) {
+func (u actServices) List(page int, limit int, code string) (result models.Result) {
 
 	if page == 0 || limit == 0 {
 		result.Data = nil
@@ -24,8 +24,16 @@ func (u actServices) List(page int, limit int) (result models.Result) {
 		return
 	}
 
-	agen := actRepo.GetList(page, limit)
+	agen := actRepo.GetList(page, limit, code)
 
+	result.Data = agen
+	result.Code = 200
+	result.Msg = "文章列表"
+	return
+}
+
+func (u actServices) TypeList() (result models.Result) {
+	agen := actRepo.GetTypeList()
 	result.Data = agen
 	result.Code = 200
 	result.Msg = "文章列表"

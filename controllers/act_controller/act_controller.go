@@ -17,8 +17,14 @@ func List(g *gin.Context) {
 
 	page := cast.ToInt(g.Query("page"))
 	limit := cast.ToInt(g.Query("limit"))
+	code := g.Query("type")
 
-	result := ActService.List(page, limit)
+	result := ActService.List(page, limit, code)
+	response.Res(g, result)
+}
+
+func TypeList(g *gin.Context) {
+	result := ActService.TypeList()
 	response.Res(g, result)
 }
 
