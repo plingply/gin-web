@@ -15,17 +15,17 @@ func InitRouter(router *gin.Engine) {
 
 	router.LoadHTMLGlob("static/*.html")
 
-	// 模板
-	view := router.Group("/")
-	{
-		view.GET("/", func(c *gin.Context) {
-			c.HTML(200, "index.html", nil)
-		})
+	// // 模板
+	// view := router.Group("/")
+	// {
+	// 	view.GET("/", func(c *gin.Context) {
+	// 		c.HTML(200, "index.html", nil)
+	// 	})
 
-		view.GET("/upload", func(c *gin.Context) {
-			c.HTML(200, "upload.html", nil)
-		})
-	}
+	// 	view.GET("/upload", func(c *gin.Context) {
+	// 		c.HTML(200, "upload.html", nil)
+	// 	})
+	// }
 
 	api := router.Group("/api")
 	api.POST("/login", user_controller.Login)
@@ -44,7 +44,9 @@ func InitRouter(router *gin.Engine) {
 	{
 		act.GET("/list", act_controller.List)
 		act.GET("/info/:id", act_controller.Info)
+
 		act.Use(jwt.JWTAuth())
+
 		act.POST("/add", act_controller.Add)
 		act.POST("/update", act_controller.Update)
 		act.POST("/delete/:id", act_controller.Delete)

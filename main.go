@@ -20,6 +20,8 @@ func main() {
 
 	server.Use(middleware.DummyMiddleware)
 
+	server.Use(middleware.Cors())
+
 	// Recovery 中间件从任何 panic 恢复，如果出现 panic，它会写一个 500 错误。
 	server.Use(gin.Recovery())
 
