@@ -11,11 +11,6 @@ import (
 	jwtgo "github.com/dgrijalva/jwt-go"
 )
 
-type UserService interface {
-	Login(username string, password string) (result models.Result)
-	Save(user models.User) (result models.Result)
-}
-
 type userServices struct {
 }
 
