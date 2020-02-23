@@ -4,7 +4,6 @@
 
 
 var baseUrl = "http://www.xaxin.cn"
-// baseUrl = "http://127.0.0.1:9205/"
 
 const Axios = axios.create({
     baseURL: baseUrl,
