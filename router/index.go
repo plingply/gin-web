@@ -43,10 +43,11 @@ func InitRouter(router *gin.Engine) {
 	act := api.Group("/article")
 	{
 		act.GET("/list", act_controller.List)
+		act.GET("/info/:id", act_controller.Info)
+		act.Use(jwt.JWTAuth())
 		act.POST("/add", act_controller.Add)
 		act.POST("/update", act_controller.Update)
 		act.POST("/delete/:id", act_controller.Delete)
-		act.GET("/info/:id", act_controller.Info)
 	}
 
 	// 文件上传
