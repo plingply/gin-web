@@ -179,6 +179,20 @@ body {
   font-size: 14px;
   white-space: normal;
 }
+.content-box img {
+  max-width: 100%;
+  margin: 0 auto;
+}
+.content-box code {
+  width: 100%;
+  display: block;
+  background-color: #000;
+  padding: 16px;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
 .content-box table {
   margin-bottom: 10px;
   border-collapse: collapse;
@@ -302,7 +316,7 @@ header .taglist span:hover {
 }
 .menu-row {
   border-bottom: 1px solid #efefef;
-  padding: 12px 0;
+  padding: 16px 0;
   cursor: pointer;
   position: relative;
   width: 268px;
@@ -329,6 +343,8 @@ header .taglist span:hover {
   font-size: 16px;
   color: #333;
   line-height: 1;
+}
+.menu-row h1.mbt {
   margin-bottom: 12px;
 }
 .menu-row h1:hover {
@@ -337,6 +353,8 @@ header .taglist span:hover {
 .menu-row p {
   font-size: 14px;
   color: #666;
+  height: 43px;
+  overflow: hidden;
 }
 .menu-row p:hover {
   color: #999;

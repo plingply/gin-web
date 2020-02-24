@@ -15,7 +15,7 @@
     <meta name="keywords" content="教培，教育，培训，缴费">
     <meta name="description" content="教育缴费，营销，招生">
     <title>鑫鑫书屋</title>
-    <link rel="stylesheet" href="css/index.css?time=2">
+    <link rel="stylesheet" href="css/index.css?time=3">
     <script src="lib/drawbackground.js"></script>
     <script src="lib/vue.min.js"></script>
     <script src="lib/axios.js"></script>
@@ -35,8 +35,8 @@
         <div class="left_menu">
             <div>
                 <div class="menu-row" @click="clickList(item.id)" :class="{ active : art_id == item.id }" v-for="(item, index) in list" :key="index">
-                    <h1 class="textline">{{ item.title }}</h1>
-                    <p>{{ item.remark }}</p>
+                    <h1 class="textline" :class="{ mbt : item.remark }">{{ item.title }}</h1>
+                    <p v-if="item.remark" :title="item.remark">{{ item.remark }}</p>
                 </div>
 
             </div>
