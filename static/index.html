@@ -9,7 +9,7 @@
     <script src="lib/drawbackground.js"></script>
     <script src="lib/vue.min.js"></script>
     <script src="lib/axios.js"></script>
-    <script src="lib/http.js"></script>
+    <script src="js/http.js"></script>
 </head>
 
 <body>
@@ -23,42 +23,16 @@
             </div>
         </header>
         <div class="left_menu">
-            <div class="menu-row" v-for="(item, index) in list" :key="index">
+            <div class="menu-row" @click="clickList(item.id)" :class="{ active : art_id == item.id }" v-for="(item, index) in list" :key="index">
                 <h1 class="textline">{{ item.title }}</h1>
                 <p>{{ item.remark }}</p>
             </div>
         </div>
         <main class="main">
             <div class="content">
-                <h1>前端笔记(1)</h1>
-                <div>
-                    <div>window.scrollTo(x-coord,y-coord )</div>
-                    <p>x-coord 是文档中的横轴坐标。</p>
-                    <p>y-coord 是文档中的纵轴坐标。</p>
-                    <p>options 是一个包含三个属性的对象:</p>
-                    <p>·top 等同于 y-coord</p>
-                    <p>·left 等同于 x-coord</p>
-                    <p>·behavior 类型String,表示滚动行为,支持参数 smooth(平滑滚动),instant(瞬间滚动),默认值auto,实测效果等同于instant</p>
-                </div>
-
-                <div>
-                    <div>webpack4： 配置说明</div>
-                    <p>1 mode：production，development，none 这个就是告诉webpack，目前处于的环境，大致上
-                        开发环境下会执行：</p>
-                    <p>new webpack.NamedModulesPlugin(),</p>
-                    <p>new webpack.NamedChunksPlugin(),</p>
-                    <p>new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("development") })</p>
-                    <p>生成环境会执行一些混淆压缩代码</p>
-                    <p><a href="https://www.cnblogs.com/cherryvenus/p/9808320.html">https://www.cnblogs.com/cherryvenus/p/9808320.html</a>
-                    </p>
-                    <p>2 stats 设置控制台的显示，关闭模块信息，child信息，报错等等。详见文档。</p>
-                    <p>3 在vue配置中 HappyPack 会造成提取css没有作用域，造成图片无法显示等问题。</p>
-                    <p>4 new webpack.ProvidePlugin({</p>
-                    <p>$config: [resolve(`src/config/config.${process.env.NODE_ENV}.js`), 'default']</p>
-                    <p>}) 设置一个配置文件，名称可以根据环境设置，全局用$config 访问，神器。</p>
-                    <p>5 webpack生成的hash值有三种，hash没打包一次都会变，chunkhash，根据chunk改变才会重新生成，contenthash：内容变化才会重新生成，在做持久化缓存的时候，往往需要稳住hash值，只有文件改变，打包的时候才会重新生成。要做到这点，需要做一些工作，一篇博客，<a href="https://imweb.io/topic/5b6f224a3cb5a02f33c013ba">https://imweb.io/topic/5b6f224a3cb5a02f33c013ba</a>
-                    </p>
-                </div>
+                <div class="title">{{ info.title }}</div>
+                <div class="time">最近跟新：{{ info.updated_at | yyyy_mm_dd_H_M_S }}</div>
+                <div class="content-box" v-html="info.content"></div>
             </div>
         </main>
         <footer>

@@ -161,25 +161,55 @@ body {
   text-overflow: ellipsis;
 }
 .content {
-  width: 800px;
   padding: 32px;
-  font-size: 16px;
+}
+.content .title {
+  font-size: 24px;
   color: #333;
-  margin: 0 auto;
-  line-height: 2;
-}
-.content > h1 {
-  font-size: 18px;
   font-weight: bold;
-  margin-bottom: 32px;
+  margin-bottom: 2px;
 }
-.content div {
-  font-weight: bold;
-  margin-bottom: 12px;
+.content .time {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 16px;
 }
-.content p {
+.content-box {
+  font-size: 14px;
+  white-space: normal;
+}
+.content-box table {
+  margin-bottom: 10px;
+  border-collapse: collapse;
+  display: table;
+  white-space: normal;
+}
+.content-box td,
+.content-box th {
+  background: white;
+  padding: 5px 10px;
+  border: 1px solid #DDD;
+  line-height: 24px;
+  white-space: normal;
+}
+.content-box td p,
+.content-box th p {
+  padding: 0;
+  margin: 0;
+  white-space: normal;
+}
+.content-box p {
+  line-height: 1.5;
   margin-bottom: 12px;
-  padding-left: 32px;
+  font-size: 14px;
+}
+.content-box div {
+  line-height: 1.5;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+.content-box h2 {
+  margin-bottom: 12px;
 }
 header {
   width: 100%;
@@ -258,6 +288,24 @@ header .taglist span:hover {
   border-bottom: 1px solid #efefef;
   padding: 12px 0;
   cursor: pointer;
+  position: relative;
+}
+.menu-row.active::after {
+  content: "";
+  width: 6px;
+  height: 60%;
+  position: absolute;
+  top: 0;
+  right: -16px;
+  bottom: 0;
+  margin: auto 0;
+  background-color: #000;
+}
+.menu-row.active p {
+  color: #333;
+}
+.menu-row.active p:hover {
+  color: #666;
 }
 .menu-row h1 {
   font-weight: bold;
