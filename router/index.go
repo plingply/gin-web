@@ -37,6 +37,7 @@ func InitRouter(router *gin.Engine) {
 		user.POST("/add", user_controller.Add)
 		user.POST("/delete/:username", user_controller.Delete)
 		user.GET("/info/:username", user_controller.Info)
+		user.GET("/infoid/:id", user_controller.InfoByID)
 	}
 
 	// 文章

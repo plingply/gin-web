@@ -1,6 +1,7 @@
 package repo
 
 import (
+	"fmt"
 	"gin-web/datasource"
 	"gin-web/models"
 	"log"
@@ -11,6 +12,7 @@ import (
 type UserRepository interface {
 	GetUserByUserNameAndPwd(username string, password string) (user models.User)
 	GetUserByUsername(username string) (params models.Params)
+	GetUserByID(id uint) (params models.Params)
 	Save(user models.User) (int, models.User)
 	Deletes(username string) (user models.User)
 }
@@ -37,6 +39,27 @@ func (n userRepository) GetUserByUsername(username string) (param models.Params)
 	}
 
 	params, errs := models.FormatResult(rows)
+
+	if errs != nil {
+		return nil
+	}
+
+	param = params[0]
+	delete(param, "password")
+
+	return
+}
+
+func (n userRepository) GetUserByID(id uint) (param models.Params) {
+	db := datasource.GetDB()
+	rows, err := db.Table("user").Where("id = ?", id).Rows()
+
+	if err != nil {
+		return nil
+	}
+	// TODO 未完成
+	params, errs := models.FormatResult(rows)
+	fmt.Println("rows=%v\n", params)
 
 	if errs != nil {
 		return nil

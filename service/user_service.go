@@ -100,6 +100,27 @@ func (u userServices) Info(user models.User) (result models.Result) {
 	return
 }
 
+// Info 详情
+func (u userServices) InfoByID(user models.User) (result models.Result) {
+	if user.ID == 0 {
+		result.Data = nil
+		result.Code = -1
+		result.Msg = "参数错误"
+		return
+	}
+	agen := userRepo.GetUserByID(user.ID)
+	if agen["id"] == "" {
+		result.Data = nil
+		result.Code = -1
+		result.Msg = "用户不存在"
+		return
+	}
+	result.Data = agen
+	result.Code = 200
+	result.Msg = "用户详情"
+	return
+}
+
 // Delete 删除
 func (u userServices) Delete(user models.User) (result models.Result) {
 	if user.Username == "" {

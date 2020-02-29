@@ -6,6 +6,8 @@ import (
 	"gin-web/service"
 	"gin-web/utils/response"
 
+	"github.com/spf13/cast"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -67,5 +69,19 @@ func Info(g *gin.Context) {
 	username := g.Param("username")
 	user.Username = username
 	result := UserService.Info(user)
+	response.Res(g, result)
+}
+
+// InfoByID 详情
+func InfoByID(g *gin.Context) {
+	if token, isOk := g.Get("claims"); isOk {
+		fmt.Println("tokne.user=>>", token)
+	}
+
+	var user models.User
+	id := g.Param("id")
+	ids := cast.ToUint(id)
+	user.ID = ids
+	result := UserService.InfoByID(user)
 	response.Res(g, result)
 }
